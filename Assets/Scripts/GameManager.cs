@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     private float spawnInterval = 3f;   
     public float spawnIntervalOrginal = 3f;
     public float offscreenMargin = 2f;
-    private int Scaling = 10;
+    private int Scaling = 1;
     public int ScalingOrginal = 10;
     public float postBossSpawnInterval = 2f;
     public int PostBossScaling = 5;
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public int level = 1;
     private Camera mainCam;
 
+    [SerializeField] AudioSource BossMusic;
     void Awake()
     {
         mainCam = Camera.main;
@@ -109,6 +110,7 @@ public void OnBossDefeated()
 
             {
                 ClearEnemies();
+                BossMusic.Play();
                 enemySpawner.SpawnBossBulk(BoardManager, PlayerController.transform, spawnPos, PlayerController, level);
                 spawnInterval = postBossSpawnInterval;
                 Scaling = PostBossScaling;
